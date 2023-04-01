@@ -40,6 +40,7 @@ int main(int argc, char const *argv[])
     cargar(cantClientes, cant);
     mostrar(cantClientes, cant);
 
+    free(cantClientes); // libero cantClientes
     return 0;
 }
 
@@ -77,6 +78,8 @@ void cargar(Cliente *cantClientes, int cant){
             cantClientes[i].Productos[j].TipoProducto = TiposProductos[rand() % 5];
         }
     }
+
+    free(Buff); //libero el puntero auxiliar
 }
 
 
@@ -91,6 +94,8 @@ void mostrar(Cliente *cantClientes, int cant){
         printf("Nombre: %s\n",cantClientes[i].NombreCliente);
         printf("Cantidad de productos: %d \n",cantClientes[i].CantidadProductosAPedir);
 
+        free(cantClientes[i].NombreCliente); // libero el nombre
+
         puts("----Productos----");
         for (int j = 0; j < cantClientes[i].CantidadProductosAPedir; j++)
         {
@@ -102,6 +107,8 @@ void mostrar(Cliente *cantClientes, int cant){
             printf("\tPrecio Total: $ %.2f\n",costoTotalProducto(&cantClientes[i].Productos[j]) ); //xq se pone el &??
             printf("\n");
         }
+
+        free(cantClientes[i].Productos);
     }
 }
 
