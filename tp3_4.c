@@ -34,8 +34,12 @@ int main(int argc, char const *argv[])
 
     srand(time(NULL)); // srand me genera una semilla a partir de time
 
-    printf("Cantidad de clientes (5 o menos): ");
-    scanf("%d",&cant);
+    do
+    {
+        printf("Cantidad de clientes (5 o menos): ");
+        scanf("%d",&cant);
+    } while (cant < 1 || cant > 5);
+
     cantClientes =(Cliente *) malloc(sizeof(Cliente) * cant); // asigno dinamicamente cant espacios 
     cargar(cantClientes, cant);
     mostrar(cantClientes, cant);
@@ -86,6 +90,7 @@ void cargar(Cliente *cantClientes, int cant){
 // FUNCION MOSTRAR
 void mostrar(Cliente *cantClientes, int cant){
     printf("\n");
+    float totalPorCliente=0;
     puts("==================== MUESTRA ====================");
     for (int i = 0; i < cant; i++)
     {
@@ -104,10 +109,12 @@ void mostrar(Cliente *cantClientes, int cant){
             printf("ID producto: %d \n",cantClientes[i].Productos[j].ProductoID);
             printf("Cantidad: %d \n",cantClientes[i].Productos[j].Cantidad);
             printf("Precio: $ %.2f \n",cantClientes[i].Productos[j].PrecioUnitario);
-            printf("\tPrecio Total: $ %.2f\n",costoTotalProducto(&cantClientes[i].Productos[j]) ); //xq se pone el &??
+            printf("\tPrecio total producto: $ %.2f\n",costoTotalProducto(&cantClientes[i].Productos[j]) ); //xq se pone el &??
+            totalPorCliente = totalPorCliente + costoTotalProducto(&cantClientes[i].Productos[j]);
             printf("\n");
         }
-
+        printf("\t\tCOSTO TOTAL DEL CLIENTE: $ %.2f\n\n", totalPorCliente);
+        totalPorCliente = 0;
         free(cantClientes[i].Productos);
     }
 }
