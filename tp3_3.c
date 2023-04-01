@@ -13,7 +13,7 @@ int main() {
     {
         printf("Ingrese el nombre %d: \n", i + 1);
         gets(Buff);
-        v[i] = (char *)malloc(sizeof(char) * (strlen(Buff)+1)); //guardo espacio para 100 caracters, el 1 es para el \n??, strlen=longitud
+        *(v + i) = (char *)malloc(sizeof(char) * (strlen(Buff)+1)); //guardo espacio para 100 caracters, el 1 es para el \n??, strlen=longitud
         strcpy(v[i],Buff); // copi Buff en v[i]
     }
 
